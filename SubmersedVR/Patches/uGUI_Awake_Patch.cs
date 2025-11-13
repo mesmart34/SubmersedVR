@@ -14,5 +14,7 @@ internal static class uGUI_AwakeS_Patch
         var rig = new GameObject(nameof(VRCameraRig)).AddComponent<VRCameraRig>();
         VRCameraRig.instance = rig;
         Object.DontDestroyOnLoad(rig);
+        
+        MiscTweaks.BetterTextureQuality();
     }
 }

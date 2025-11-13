@@ -3,9 +3,9 @@
 namespace SubmersedVR.Patches;
 
 [HarmonyPatch(typeof(CyclopsExternalCams), nameof(CyclopsExternalCams.SetActive))]
-static class RecenterWhenUsingCyclopsCams
+internal static class CyclopsExternalCams_SetActive_Patch
 {
-    public static void Postfix()
+    internal static void Postfix()
     {
         VRUtil.Recenter();
     }

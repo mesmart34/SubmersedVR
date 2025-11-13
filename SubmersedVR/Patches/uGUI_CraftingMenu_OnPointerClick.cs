@@ -4,15 +4,15 @@ using HarmonyLib;
 namespace SubmersedVR.Patches;
 
 [HarmonyPatch(typeof(uGUI_CraftingMenu))]
-public static class CraftingMenuUseControllerButtons
+internal static class uGUI_CraftingMenu_OnPointerClick
 {
-    public static MethodBase TargetMethod()
+    internal static MethodBase TargetMethod()
     {
         var type = typeof(uGUI_CraftingMenu);
         return AccessTools.FirstMethod(type, method => method.Name.Contains("OnPointerClick"));
     }
 
-    static bool Prefix(ref bool __result, uGUI_CraftingMenu __instance, uGUI_ItemIcon icon, int button)
+    internal static bool Prefix(ref bool __result, uGUI_CraftingMenu __instance, uGUI_ItemIcon icon, int button)
     {
         Mod.logger.LogInfo($"uGUI_CraftingMenu OnPointerClick called {button} ");
         if (__instance.interactable)

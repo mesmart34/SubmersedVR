@@ -10,9 +10,9 @@ namespace SubmersedVR.Patches;
 extern alias SteamVRRef;
 
 [HarmonyPatch(typeof(GameInput), nameof(GameInput.GetFloat))]
-public static class SteamVrGetFloat
+internal static class GameInput_GetFloat_Patch
 {
-    public static bool Prefix(GameInput.Button action, ref float __result)
+    internal static bool Prefix(GameInput.Button action, ref float __result)
     {
         if (SteamVrGameInput.InputLocked || !SteamVrGameInput.IsSteamVrReady || VRHands.instance == null)
         {

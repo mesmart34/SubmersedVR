@@ -7,9 +7,9 @@ namespace SubmersedVR.Patches;
 extern alias SteamVRRef;
 
 [HarmonyPatch(typeof(Builder), nameof(Builder.UpdateRotation))]
-public static class BuilderUpdateRotationUseCustomActions
+internal static class Builder_UpdateRotation_Patch
 {
-    static bool Prefix(int max, ref bool __result)
+    internal static bool Prefix(int max, ref bool __result)
     {
         if (SteamVR_Actions.subnautica_BuilderRotateRight.GetStateDown(SteamVRRef::Valve.VR.SteamVR_Input_Sources.Any))
         {

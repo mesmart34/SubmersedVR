@@ -10,7 +10,7 @@ public class ShaderLoader
 
     public static bool Initialize(string assetBundlePath)
     {
-        return loadAllShadersFromAssetBundle(assetBundlePath);
+        return LoadAllShadersFromAssetBundle(assetBundlePath);
     }
 
     public static Shader GetShader(string name)
@@ -21,15 +21,17 @@ public class ShaderLoader
             Debug.Log("GetShader called before Initializing.");
             return null;
         }
-        if (!Shaders.ContainsKey(name))
+
+        if (Shaders.TryGetValue(name, out var shader))
         {
-            Debug.Log("shaders dictionary does not contain shader: " + name);
-            return null;
+            return shader;
         }
-        return Shaders[name];
+        
+        Debug.Log("shaders dictionary does not contain shader: " + name);
+        return null;
     }
 
-    private static bool loadAllShadersFromAssetBundle(string assetBundlePath)
+    private static bool LoadAllShadersFromAssetBundle(string assetBundlePath)
     {
         var loadedAssetBundle = AssetBundle.LoadFromFile(assetBundlePath);
         Debug.Log("loadAllShadersFromAssetBundle called.");

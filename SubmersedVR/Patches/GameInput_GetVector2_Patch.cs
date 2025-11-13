@@ -10,7 +10,7 @@ namespace SubmersedVR.Patches;
 extern alias SteamVRRef;
 
 [HarmonyPatch(typeof(GameInput), nameof(GameInput.GetVector2))]
-public static class SteamVrGetVector2
+public static class GameInput_GetVector2_Patch
 {
     public static bool Prefix(GameInput.Button action, ref Vector2 __result)
     {

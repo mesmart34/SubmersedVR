@@ -1,9 +1,8 @@
-using HarmonyLib;
-using SubmersedVR.Input;
+﻿using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SubmersedVR.Tweaks;
+namespace SubmersedVR.Patches;
 
 // Taken from https://github.com/IWhoI/SubnauticaVREnhancements/blob/master/VREnhancements/UIElementsFixes.cs#L271-L299
 /*
@@ -30,9 +29,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 [HarmonyPatch(typeof(uGUI_SceneLoading), nameof(uGUI_SceneLoading.Awake))]
-static class LoadingScreen_Patch
+internal static class LoadingScreen_Patch
 {
-    static void Postfix(uGUI_SceneLoading __instance)
+    internal static void Postfix(uGUI_SceneLoading __instance)
     {
         var loadingArtwork = __instance.loadingBackground.transform.Find("LoadingArtwork").GetComponent<Image>();
         var midCenter = new Vector2(0.5f, 0.5f);
@@ -44,25 +43,19 @@ static class LoadingScreen_Patch
             loadingArtwork.color = Color.black;
             loadingArtwork.GetComponent<RectTransform>().localScale = Vector3.one;
         }
-        if (logo != null)
-        {
-            //center the logo and loading bar
-            var logoRect = logo.GetComponent<RectTransform>();
-            logoRect.anchoredPosition = new Vector2(0, 120f);
-            logoRect.anchorMax = logoRect.anchorMin = midCenter;
-            var parentCanvasRect = logo.transform.parent.GetComponent<RectTransform>();
-            parentCanvasRect.anchoredPosition = new Vector2(0, -25f);
-            parentCanvasRect.anchorMin = Vector2.zero;
-            parentCanvasRect.anchorMax = Vector2.one;
-        }
-    }
-}
 
-[HarmonyPatch(typeof(WaitScreen), nameof(WaitScreen.Update))]
-static class LockInputWhileLoading
-{
-    static void Postfix(WaitScreen __instance)
-    {
-        SteamVrGameInput.InputLocked = __instance.isWaiting;
+        if (logo == null)
+        {
+            return;
+        }
+        
+        //center the logo and loading bar
+        var logoRect = logo.GetComponent<RectTransform>();
+        logoRect.anchoredPosition = new Vector2(0, 120f);
+        logoRect.anchorMax = logoRect.anchorMin = midCenter;
+        var parentCanvasRect = logo.transform.parent.GetComponent<RectTransform>();
+        parentCanvasRect.anchoredPosition = new Vector2(0, -25f);
+        parentCanvasRect.anchorMin = Vector2.zero;
+        parentCanvasRect.anchorMax = Vector2.one;
     }
 }

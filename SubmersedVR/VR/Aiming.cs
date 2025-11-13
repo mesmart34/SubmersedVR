@@ -8,6 +8,7 @@ public static class Aiming
     {
         return VRCameraRig.instance?.laserPointer.eventCamera;
     }
+    
     public static Transform GetAimTransform()
     {
         return VRCameraRig.instance?.laserPointer.transform;

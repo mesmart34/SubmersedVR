@@ -12,7 +12,7 @@ namespace SubmersedVR.Tweaks;
 extern alias SteamVRActions;
 extern alias SteamVRRef;
 
-static class HapticsVR
+public static class HapticsVR
 {
     public static GameObject lastHoverComponent = null;
 

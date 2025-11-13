@@ -4,9 +4,9 @@ using SubmersedVR.VR;
 namespace SubmersedVR.Patches;
 
 [HarmonyPatch(typeof(uGUI_CanvasScaler), nameof(uGUI_CanvasScaler.UpdateTransform))]
-public static class uGUI_CanvasScalerPDA_Attach
+internal static class uGUI_CanvasScalerPDA_Attach
 {
-    public static void Postfix(uGUI_CanvasScaler __instance)
+    internal static void Postfix(uGUI_CanvasScaler __instance)
     {
         // TODO: There gotta be a better way to attach this only to the PDA, maybe custom behaviour, disabling the Scalar?
         if (__instance.gameObject.GetComponent<uGUI_PDA>() == null)

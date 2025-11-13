@@ -4,9 +4,9 @@ using SubmersedVR.VR;
 namespace SubmersedVR.Patches;
 
 [HarmonyPatch(typeof(Vehicle), nameof(Vehicle.OnPilotModeBegin))]
-public static class SetHudStaticInVehicles
+internal static class Vehicle_OnPilotModeBegin_Patch
 {
-    public static void Postfix(Vehicle __instance)
+    internal static void Postfix(Vehicle __instance)
     {
         if (__instance is SeaMoth || __instance is Exosuit)
         {

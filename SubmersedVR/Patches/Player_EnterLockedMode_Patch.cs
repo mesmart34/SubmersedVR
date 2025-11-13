@@ -3,9 +3,9 @@
 namespace SubmersedVR.Patches;
 
 [HarmonyPatch(typeof(Player), nameof(Player.EnterLockedMode))]
-static class RecenterWhenPilotingLocked
+internal static class Player_EnterLockedMode_Patch
 {
-    public static void Postfix()
+    internal static void Postfix()
     {
         VRUtil.Recenter();
     }

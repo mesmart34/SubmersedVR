@@ -8,7 +8,7 @@ namespace SubmersedVR.Patches;
 
 [HarmonyPatch(typeof(Targeting), nameof(Targeting.GetTarget))]
 [HarmonyPatch([typeof(float), typeof(GameObject), typeof(float)], [ArgumentType.Normal, ArgumentType.Out, ArgumentType.Out])]
-internal static class WorldTargetingWithController
+internal static class Targeting_GetTarget_Patch
 {
     internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {

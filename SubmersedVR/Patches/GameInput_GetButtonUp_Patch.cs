@@ -6,7 +6,7 @@ using SubmersedVR.Input;
 namespace SubmersedVR.Patches;
 
 [HarmonyPatch(typeof(GameInput), nameof(GameInput.GetButtonUp))]
-internal static class SteamVrGetButtonUp
+internal static class GameInput_GetButtonUp_Patch
 {
     internal static bool Prefix(GameInput.Button action, ref bool __result)
     {

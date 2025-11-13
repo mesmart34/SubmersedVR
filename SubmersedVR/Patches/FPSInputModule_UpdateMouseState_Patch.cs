@@ -5,18 +5,18 @@ using UnityEngine.EventSystems;
 namespace SubmersedVR.Patches;
 
 [HarmonyPatch(typeof(FPSInputModule), nameof(FPSInputModule.UpdateMouseState))]
-class EmulateMiddleMosueButtonToo : PointerInputModule
+internal class FPSInputModule_UpdateMouseState_Patch : PointerInputModule
 {
     [HarmonyReversePatch]
     [HarmonyPatch(typeof(PointerInputModule), "GetPointerData")]
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static bool GetPointerData(FPSInputModule instance, int id, out PointerEventData data, bool create)
+    internal static bool GetPointerData(FPSInputModule instance, int id, out PointerEventData data, bool create)
     {
         data = null;
         return false;
     }
 
-    public static void Postfix(FPSInputModule __instance, PointerEventData leftData)
+    internal static void Postfix(FPSInputModule __instance, PointerEventData leftData)
     {
         GetPointerData(__instance, -3, out var data2, create: true);
         __instance.CopyFromTo(leftData, data2);

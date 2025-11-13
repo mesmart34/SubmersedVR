@@ -27,8 +27,8 @@ internal class VRHands : MonoBehaviour
     public Transform leftElbow;
     public Transform rightElbow;
 
-    private Vector3 leftElbowOffset;
-    private Vector3 rightElbowOffset;
+    private Vector3 _leftElbowOffset;
+    private Vector3 _rightElbowOffset;
 
     public static VRHands instance;
 
@@ -56,8 +56,8 @@ internal class VRHands : MonoBehaviour
         leftTarget = camRig.leftHandTarget.transform;
         rightTarget = camRig.rightHandTarget.transform;
 
-        leftElbowOffset = leftElbow.transform.position - leftHand.transform.position;
-        rightElbowOffset = rightElbow.transform.position - rightHand.transform.position;
+        _leftElbowOffset = leftElbow.transform.position - leftHand.transform.position;
+        _rightElbowOffset = rightElbow.transform.position - rightHand.transform.position;
 
         ResetHandTargets();
 

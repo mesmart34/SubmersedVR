@@ -1,19 +1,11 @@
-using HarmonyLib;
+﻿using HarmonyLib;
 using SubmersedVR.VR;
 using UnityEngine;
 
-namespace SubmersedVR.Tweaks;
-
-// Tweaks regarding the breath and bubbles in VR mode of the game
-static class BreathBubblesVR
-{
-
-}
-
-#region Patches
+namespace SubmersedVR.Patches;
 
 [HarmonyPatch(typeof(PlayerBreathBubbles), nameof(PlayerBreathBubbles.MakeBubbles))]
-public static class PlayerBubbles_Patch
+public static class PlayerBreathBubbles_MakeBubbles_Patch
 {
     [HarmonyPrefix]
     public static bool Prefix(PlayerBreathBubbles __instance)
@@ -41,19 +33,3 @@ public static class PlayerBubbles_Patch
         return true;
     }
 }
-
-
-/*
-    //Make bubbles generate more often
-    [HarmonyPatch(typeof(PlayerBreathBubbles), nameof(PlayerBreathBubbles.Start))]
-    public static class PlayerBreathBubbles_Patch2
-    {
-        [HarmonyPrefix]
-        public static bool Prefix(PlayerBreathBubbles __instance)
-        {
-           __instance.delay = 5.0f;
-            return true;
-        }
-    }
-*/
-#endregion

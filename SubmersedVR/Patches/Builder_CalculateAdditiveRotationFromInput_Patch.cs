@@ -7,7 +7,7 @@ namespace SubmersedVR.Patches;
 extern alias SteamVRRef;
 
 [HarmonyPatch(typeof(Builder), nameof(Builder.CalculateAdditiveRotationFromInput))]
-internal static class BuilderRotateUseCustomActions
+internal static class Builder_CalculateAdditiveRotationFromInput_Patch
 {
     internal static bool Prefix(float additiveRotation, ref float __result)
     {
