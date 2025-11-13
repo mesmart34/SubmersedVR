@@ -10,10 +10,10 @@
     <!-- NOTE: Preprocessor directive SV = SubmersedVR, BZ = Below Zero -->
     <DefineConstants>SV</DefineConstants>
     <!-- NOTE: Change this to your own directoy when building -->
-    <SubnauticaDir>/home/oka/.local/share/Steam/steamapps/common/Subnautica/</SubnauticaDir>
+    <SubnauticaDir>F:\Games\Subnautica</SubnauticaDir>
     <NoWarn>$(NoWarn);CS0436</NoWarn>
-    <!-- <BuildDir>/home/oka/.local/share/Steam/steamapps/common/Subnautica</BuildDir> -->
-    <BuildDir>build</BuildDir>
+<!--    <BuildDir>/home/oka/.local/share/Steam/steamapps/common/Subnautica</BuildDir> -->
+    <BuildDir>$(SubnauticaDir)</BuildDir>
   </PropertyGroup>
 
   <ItemGroup>
@@ -62,7 +62,7 @@
     <Copy SourceFiles="StreamingAssets\SteamVR\bindings_holographic.json" DestinationFolder="@(BindingsFolder)" SkipUnchangedFiles="true"/>
     <Copy SourceFiles="SteamVR\SteamVR.dll" DestinationFolder="@(ManagedFolder)" SkipUnchangedFiles="true"/>
     <Copy SourceFiles="SteamVR\SteamVR_Actions.dll" DestinationFolder="@(ManagedFolder)" SkipUnchangedFiles="true"/>
-    <ZipDirectory SourceDirectory="$(BuildDir)" DestinationFile="$(MSBuildProjectDirectory)\$(AssemblyName)_$(Version).zip" />
+<!--    <ZipDirectory SourceDirectory="$(BuildDir)" DestinationFile="$(MSBuildProjectDirectory)\$(AssemblyName)_$(Version).zip" />-->
   </Target>
 
 </Project>

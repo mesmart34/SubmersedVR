@@ -1,6 +1,6 @@
-﻿using UnityEngine.UI;
-using HarmonyLib;
+﻿using HarmonyLib;
 using TMPro;
+using UnityEngine.UI;
 
 // Taken from https://github.com/IWhoI/SubnauticaVREnhancements/blob/8a7bccb3c88292f245d456af4f23acfb79e07c7f/VREnhancements/AdditionalVROptions.cs
 /*
@@ -28,6 +28,8 @@ SOFTWARE.
 */
 
 //Adds Recenter VR button to the in game menu.
+namespace SubmersedVR.Tweaks;
+
 [HarmonyPatch(typeof(IngameMenu), nameof(IngameMenu.Awake))]
 static class IGM_Awake_Patch
 {
@@ -38,7 +40,7 @@ static class IGM_Awake_Patch
         if (__instance && recenterVRButton == null)
         {
             //Clone the quitToMainMenuButton and update it
-            Button menuButton = __instance.quitToMainMenuButton.transform.parent.GetChild(0).gameObject.GetComponent<Button>();
+            var menuButton = __instance.quitToMainMenuButton.transform.parent.GetChild(0).gameObject.GetComponent<Button>();
             recenterVRButton = UnityEngine.Object.Instantiate<Button>(menuButton, __instance.quitToMainMenuButton.transform.parent);
             recenterVRButton.transform.SetSiblingIndex(1);//put the button in the second position in the menu
             recenterVRButton.name = "RecenterVR";

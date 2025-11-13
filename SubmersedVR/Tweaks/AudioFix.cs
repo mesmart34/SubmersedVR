@@ -1,6 +1,7 @@
-﻿using HarmonyLib;
+﻿using FMODUnity;
+using HarmonyLib;
 using UnityEngine;
-using FMODUnity;
+
 // Taken from https://github.com/IWhoI/SubnauticaVREnhancements/blob/master/VREnhancements/AudioFix.cs
 /*
 MIT License
@@ -27,24 +28,23 @@ SOFTWARE.
 */
 
 
-namespace VREnhancements
+namespace SubmersedVR.Tweaks;
+
+class AudioFix
 {
-    class AudioFix
+    [HarmonyPatch(typeof(SNCameraRoot), nameof(SNCameraRoot.Awake))]
+    class Awake_Patch
     {
-        [HarmonyPatch(typeof(SNCameraRoot), nameof(SNCameraRoot.Awake))]
-        class Awake_Patch
+        static void Postfix(SNCameraRoot __instance)
         {
-            static void Postfix(SNCameraRoot __instance)
+            if (SNCameraRoot.main.mainCam)
             {
-                if (SNCameraRoot.main.mainCam)
-                {
-                    //remove the audio listeners from the PlayerCameras object that does not rotate with the VR headset
-                    Object.Destroy(__instance.gameObject.GetComponent<AudioListener>());
-                    Object.Destroy(__instance.gameObject.GetComponent<StudioListener>());
-                    //add new listener to the main camera that does rotate with the VR headset
-                    SNCameraRoot.main.mainCam.gameObject.AddComponent<AudioListener>();
-                    SNCameraRoot.main.mainCam.gameObject.AddComponent<StudioListener>();
-                }
+                //remove the audio listeners from the PlayerCameras object that does not rotate with the VR headset
+                Object.Destroy(__instance.gameObject.GetComponent<AudioListener>());
+                Object.Destroy(__instance.gameObject.GetComponent<StudioListener>());
+                //add new listener to the main camera that does rotate with the VR headset
+                SNCameraRoot.main.mainCam.gameObject.AddComponent<AudioListener>();
+                SNCameraRoot.main.mainCam.gameObject.AddComponent<StudioListener>();
             }
         }
     }
